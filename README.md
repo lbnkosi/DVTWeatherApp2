@@ -47,3 +47,42 @@ For this iteration, I decided to take a different approach. My goal was to move 
 ## Conclusion
 
 While the previous assessment reflected my technical proficiency and ability to handle complex codebases, this project showcases my growth as a developer who now prioritizes simplicity, efficiency, and collaboration. By focusing on areas such as TDD, code coverage, and modern Android development practices like Jetpack Compose, I believe this project offers real value not just to developers but also to the business as a whole.
+
+## What I've done
+- [x] Clean Arch, MVVM, Solid 
+- [x] Jetpack Compose
+- [x] Unit Tests & TDD (Not 100% coverage, not enough time)
+- [x] Simplified code
+- [x] Used OpenWeatherMap to show weather as well as daily forecast. Added caching as well
+- [x] Added ability to search for a place, show it on Google maps and save it locally
+
+## Languages, libraries and tools used
+
+* Kotlin
+* Jetpack Compose
+* Android Support Libraries
+* Jetpack Libraries
+* Retrofit
+* Room
+* Hilt (Depedency injection)
+* Dagger (Depedency injection)
+* Stetho
+* Google Play Services
+* Stream Support
+* Gson
+* Various Unit Test Libraries
+* And More
+
+## Requirements
+
+* OpenWeatherMap Api Key
+* Google Maps Api Key
+* Android Device - minSdkVersion 29
+* Android Studio
+
+## Additional Comments
+Due to time constraints, I wasn’t able to fully showcase the current project as I had originally envisioned. However, I’ve attached a link to another Android project that I developed, which demonstrates a wider range of skills and technologies. This project includes a custom API built using Spring, MongoDB, and AWS. It also integrates GitHub Actions and Secrets, along with AppCenter, to implement a CI/CD pipeline that automates APK deployment.
+
+Portfolio Android App: https://github.com/lbnkosi/PortfolioAndroidApp
+
+Portfolio Spring Boot API: https://github.com/lbnkosi/PortfolioRestApi-Springboot
