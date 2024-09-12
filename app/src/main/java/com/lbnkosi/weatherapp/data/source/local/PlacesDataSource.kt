@@ -22,8 +22,8 @@ class PlacesDataSource @Inject constructor(private val placeDao: PlacesDao) {
     /**
      * Get a place by address
      */
-    suspend fun getPlaceByAddress(address: String): Flow<PlacesEntity?> {
-        val place = placeDao.getPlaceByAddress(address)
+    suspend fun getPlaceByAddress(id: String): Flow<PlacesEntity?> {
+        val place = placeDao.getPlaceById(id)
         return flow { emit(place) }
     }
 

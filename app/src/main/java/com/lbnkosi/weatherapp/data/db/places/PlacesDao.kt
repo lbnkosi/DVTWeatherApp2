@@ -19,8 +19,8 @@ interface PlacesDao {
     suspend fun getPlace(id: Int): PlacesEntity
 
     //Get place by id
-    @Query("SELECT * FROM Places WHERE id=:address ORDER BY id DESC LIMIT 1")
-    suspend fun getPlaceByAddress(address: String): PlacesEntity?
+    @Query("SELECT * FROM Places WHERE id=:id ORDER BY id DESC LIMIT 1")
+    suspend fun getPlaceById(id: String): PlacesEntity?
 
     //Create place
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -14,9 +14,7 @@ import javax.inject.Inject
 class WeatherDataRepository @Inject constructor(private val dataSource: RemoteWeatherDataSource, private val localDataSource: LocalWeatherDataSource) : IWeatherDataRepository {
 
     override suspend fun getWeatherData(lat: Double, lon: Double): Flow<Resource<OpenWeatherMapResponse?>?>? {
-        return dataSource.getWeatherData(lat, lon)?.map { resource ->
-            resource
-        }
+        return dataSource.getWeatherData(lat, lon)?.map { resource -> resource }
     }
 
     override suspend fun getCachedWeatherData(): Flow<LocalWeatherData?> {

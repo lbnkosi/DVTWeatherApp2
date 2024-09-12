@@ -1,20 +1,15 @@
 package com.lbnkosi.weatherapp.features.component
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.lbnkosi.weatherapp.R
 
 @Composable
 fun WeatherDataDailyCard(
@@ -29,10 +24,10 @@ fun WeatherDataDailyCard(
         shape = RoundedCornerShape(8.dp),
     ) {
         ConstraintLayout(modifier = modifier.padding(horizontal = 10.dp, vertical = 10.dp)) {
-            val (title, textDate, textEpisode, image) = createRefs()
+            val (textLocation, textWeather, textLatLng) = createRefs()
 
             WeatherAppText(
-                modifier = Modifier.constrainAs(title) {
+                modifier = Modifier.constrainAs(textLocation) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
                 },
@@ -41,8 +36,8 @@ fun WeatherDataDailyCard(
                 color = MaterialTheme.colors.onBackground
             )
             WeatherAppText(
-                modifier = Modifier.constrainAs(textDate) {
-                    top.linkTo(title.bottom)
+                modifier = Modifier.constrainAs(textWeather) {
+                    top.linkTo(textLocation.bottom)
                     start.linkTo(parent.start)
                 },
                 text = "Weather: $date",
@@ -50,24 +45,13 @@ fun WeatherDataDailyCard(
                 color = MaterialTheme.colors.onBackground,
             )
             WeatherAppText(
-                modifier = Modifier.constrainAs(textEpisode) {
-                    top.linkTo(textDate.bottom)
+                modifier = Modifier.constrainAs(textLatLng) {
+                    top.linkTo(textWeather.bottom)
                     start.linkTo(parent.start)
                 },
                 text = "LatLng: $latlng",
                 style = MaterialTheme.typography.body2,
                 color = MaterialTheme.colors.onBackground,
-            )
-
-            Image(
-                modifier = Modifier.constrainAs(image) {
-                    top.linkTo(parent.top, margin = 16.dp)
-                    bottom.linkTo(parent.bottom, margin = 24.dp)
-                    end.linkTo(parent.end)
-                },
-                painter = painterResource(id = R.drawable.ic_android_black_24dp),
-                contentDescription = "",
-                contentScale = ContentScale.Inside
             )
         }
     }

@@ -27,7 +27,7 @@ class HomeViewModel @Inject constructor(private val useCase: WeatherDataUseCase,
         getWeatherData()
     }
 
-    private fun getWeatherData() {
+    fun getWeatherData() {
         viewModelScope.launch {
             try {
                 val location = locationProvider.getCurrentLocation()

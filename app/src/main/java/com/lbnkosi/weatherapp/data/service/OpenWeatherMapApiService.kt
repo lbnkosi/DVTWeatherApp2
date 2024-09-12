@@ -7,9 +7,6 @@ import retrofit2.http.Query
 
 interface OpenWeatherMapApiService {
 
-    //@Query exclude: String,
-    //@Query units: String,
-    //@Query lang: String,
     @GET(ApiUrl.ONE_CALL_PATH)
     fun getWeatherData(
         @Query("lat") lat: Double,

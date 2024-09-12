@@ -1,19 +1,14 @@
 plugins {
-    //id("com.android.library")
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
 }
 
-// Exclude any undesired versions of animation-android
 configurations.all {
     resolutionStrategy {
-        // Forces all matching dependencies to use the specified version
         force ("androidx.compose.animation:animation:1.4.0")
-        // Exclude animation-android or any other version mismatch
         exclude(group = "androidx.compose.animation", module = "animation-android")
-        //exclude (group ("androidx.compose.animation', module: 'animation-android"))
     }
 }
 
@@ -28,10 +23,11 @@ android {
         versionCode = 100
         versionName = "1.0.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        testInstrumentationRunner = "com.lbnkosi.weatherapp.Runner"
     }
 
     buildTypes {
@@ -64,6 +60,8 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.runner)
+    androidTestImplementation(libs.androidx.core.testing)
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)
     androidTestImplementation(composeBom)
@@ -71,13 +69,9 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-//    implementation(libs.androidx.activity.compose)
-//    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
-    //implementation(libs.androidx.material3)
-    //androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -160,50 +154,62 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
 
     // Force using only the correct version of the animation library
-    implementation("androidx.compose.animation:animation:1.4.0")
+    implementation(libs.androidx.animation)
 
-    implementation ("com.google.maps.android:maps-compose:2.11.0")
-    implementation ("com.google.android.gms:play-services-maps:18.1.0")
-    implementation ("com.google.maps.android:maps-utils-ktx:3.4.0")
+    implementation (libs.maps.compose)
+    implementation (libs.play.services.maps)
+    implementation (libs.maps.utils.ktx)
 
-    testImplementation("junit:junit:4.13")
-    testImplementation("org.mockito:mockito-core:5.2.1")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:5.2.1")
+    testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
 
     // JUnit 4 for Unit Testing
-    testImplementation ("junit:junit:4.13.2")
+    testImplementation (libs.junit)
 
     // Kotlin Coroutines Test for testing coroutine code
-    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation (libs.kotlinx.coroutines.test)
 
     // MockK for mocking Kotlin classes and objects
-    testImplementation ("io.mockk:mockk:1.13.5")
+    testImplementation (libs.mockk)
 
     // Truth for assertions
-    testImplementation ("com.google.truth:truth:1.1.5")
+    testImplementation (libs.truth)
 
     // AndroidX Core Testing for LiveData and ViewModel
-    testImplementation ("androidx.arch.core:core-testing:2.1.0")
+    testImplementation (libs.androidx.core.testing)
 
     // AndroidX Test Core for Android-specific unit testing
-    testImplementation ("androidx.test:core:1.4.0")
+    testImplementation (libs.androidx.core)
 
     // Optional: Mockito (if you prefer Mockito over MockK for mocking)
-    testImplementation ("org.mockito:mockito-core:4.5.1")
-    testImplementation ("org.mockito.kotlin:mockito-kotlin:4.0.0")
+    testImplementation (libs.mockito.core.v451)
+    testImplementation (libs.mockito.kotlin.v400)
 
     // Optional: Espresso for UI tests (if you plan to add UI instrumentation tests later)
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.0")
-    androidTestImplementation ("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation (libs.androidx.espresso.core.v350)
+    androidTestImplementation (libs.androidx.junit.v113)
 
-    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation (libs.kotlinx.coroutines.test)
 
     testImplementation (libs.turbine)
-    implementation ("com.google.android.gms:play-services-location:21.0.1")
-    implementation ("com.google.maps.android:maps-compose:2.0.0")
-    implementation ("com.google.android.gms:play-services-maps:18.0.0")
-    implementation ("com.google.android.libraries.places:places:3.1.0")
+    implementation (libs.play.services.location)
+    implementation (libs.maps.compose.v200)
+    implementation (libs.play.services.maps.v1800)
+    implementation (libs.places)
 
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")
-    
+    implementation (libs.kotlinx.coroutines.play.services)
+
+    testImplementation (libs.mockwebserver)
+
+    testImplementation (libs.dagger.hilt.android.testing)
+    kaptTest (libs.hilt.android.compiler)
+
+    // Hilt testing dependencies (for unit and Android tests)
+    testImplementation (libs.dagger.hilt.android.testing)
+    kaptTest (libs.hilt.compiler)
+    androidTestImplementation (libs.dagger.hilt.android.testing)
+    kaptAndroidTest (libs.hilt.compiler)
+
+    testImplementation ("org.robolectric:robolectric:4.7.3")
 }

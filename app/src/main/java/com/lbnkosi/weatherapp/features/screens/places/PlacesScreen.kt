@@ -62,7 +62,6 @@ fun PlacesScreen(viewModel: PlacesViewModel) {
     val scaffoldState = rememberScaffoldState()
     val viewState = viewModel.uiState.collectAsState().value
 
-
     LaunchedEffect(viewModel.uiEvent) {
         launch {
             viewModel.uiEvent.collect {
@@ -79,13 +78,9 @@ fun PlacesScreen(viewModel: PlacesViewModel) {
         }
     }
 
-    WeatherAppScaffold(
-        modifier = Modifier.fillMaxSize(),
-        scaffoldState = scaffoldState,
-        content = {
-            Content(isLoading = viewState.isLoading, data = viewState.places, viewModel = viewModel)
-        }
-    )
+    WeatherAppScaffold(modifier = Modifier.fillMaxSize(), scaffoldState = scaffoldState, content = {
+        Content(isLoading = viewState.isLoading, data = viewState.places, viewModel = viewModel)
+    })
 
 }
 
@@ -99,19 +94,14 @@ private fun Content(isLoading: Boolean, data: List<Place>?, viewModel: PlacesVie
     val cameraPositionState = rememberCameraPositionState()
     val coroutineScope = rememberCoroutineScope()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-        //PlacesScreen2(viewModel)
+    Column(modifier = Modifier.fillMaxSize()) {
 
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 32.dp, end = 32.dp, top = 32.dp)
         ) {
-            TextField(
-                value = searchQuery,
+            TextField(value = searchQuery,
                 onValueChange = { newValue ->
                     searchQuery = newValue
                     if (newValue.isNotEmpty()) {
@@ -126,15 +116,13 @@ private fun Content(isLoading: Boolean, data: List<Place>?, viewModel: PlacesVie
                 keyboardOptions = KeyboardOptions.Default.copy(
                     imeAction = ImeAction.Done
                 ),
-                keyboardActions = KeyboardActions(
-                    onDone = {
-                        keyboardController?.hide()
-                    }
-                ),
+                keyboardActions = KeyboardActions(onDone = {
+                    keyboardController?.hide()
+                }),
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp)
-                    .border(1.dp, Color.LightGray, shape = RoundedCornerShape(topEnd = 5.dp, topStart = 5.dp, bottomStart = if (autocompletePredictions.isNullOrEmpty()) 5.dp else 0.dp, bottomEnd = if (autocompletePredictions.isNullOrEmpty()) 5.dp else 0.dp ))
+                    .border(1.dp, Color.LightGray, shape = RoundedCornerShape(topEnd = 5.dp, topStart = 5.dp, bottomStart = if (autocompletePredictions.isNullOrEmpty()) 5.dp else 0.dp, bottomEnd = if (autocompletePredictions.isNullOrEmpty()) 5.dp else 0.dp))
                     .background(Color.White, shape = RoundedCornerShape(topEnd = 5.dp, topStart = 5.dp, bottomStart = if (autocompletePredictions.isNullOrEmpty()) 5.dp else 0.dp, bottomEnd = if (autocompletePredictions.isNullOrEmpty()) 5.dp else 0.dp)),
 
                 leadingIcon = {
@@ -172,35 +160,36 @@ private fun Content(isLoading: Boolean, data: List<Place>?, viewModel: PlacesVie
                         .padding(8.dp)
                 ) {
                     autocompletePredictions?.forEach { prediction ->
-                        Text(
-                            text = prediction.getFullText(null).toString(),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(8.dp)
-                                .clickable {
-                                    coroutineScope.launch(Dispatchers.Main) {
-                                        searchQuery = prediction.getPrimaryText(null).toString()
-                                        keyboardController?.hide()
-                                        autocompletePredictions = emptyList()
-                                        val place = viewModel.getMapsPlace(prediction.placeId)
-                                        if (place?.lat?.toDouble() != null) {
-                                            val latLng = LatLng(place.lat.toDouble(), place.long.toDouble())
-                                            selectedPlace = place.apply {
-                                                name = prediction.getSecondaryText(null).toString()
-                                                description = prediction.getPrimaryText(null).toString()
-                                                lat = latLng.latitude.toString()
-                                                long = latLng.longitude.toString()
-                                            }
-                                            cameraPositionState.move(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+                        Text(text = prediction.getFullText(null).toString(), modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp)
+                            .clickable {
+                                coroutineScope.launch(Dispatchers.Main) {
+                                    searchQuery = prediction
+                                        .getPrimaryText(null)
+                                        .toString()
+                                    keyboardController?.hide()
+                                    autocompletePredictions = emptyList()
+                                    val place = viewModel.getMapsPlace(prediction.placeId)
+                                    if (place?.lat?.toDouble() != null) {
+                                        val latLng = LatLng(place.lat.toDouble(), place.long.toDouble())
+                                        selectedPlace = place.apply {
+                                            name = prediction
+                                                .getSecondaryText(null)
+                                                .toString()
+                                            description = prediction
+                                                .getPrimaryText(null)
+                                                .toString()
+                                            lat = latLng.latitude.toString()
+                                            long = latLng.longitude.toString()
                                         }
+                                        cameraPositionState.move(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
                                     }
                                 }
-                        )
+                            })
                         if (prediction.placeId != autocompletePredictions!!.last().placeId) {
                             Divider(
-                                color = Color.White,
-                                thickness = 0.5.dp,
-                                modifier = Modifier.fillMaxWidth()
+                                color = Color.White, thickness = 0.5.dp, modifier = Modifier.fillMaxWidth()
                             )
                         }
                     }
@@ -223,14 +212,12 @@ private fun Content(isLoading: Boolean, data: List<Place>?, viewModel: PlacesVie
                     .fillMaxWidth()
                     .height(300.dp)
                     .clip(RoundedCornerShape(5.dp))
-                    .background(Color.White),
-                cameraPositionState = cameraPositionState
+                    .background(Color.White), cameraPositionState = cameraPositionState
             ) {
                 selectedPlace?.let {
                     val latLng = LatLng(selectedPlace!!.lat.toDouble(), selectedPlace!!.long.toDouble())
                     Marker(
-                        state = MarkerState(position = latLng),
-                        title = selectedPlace?.description
+                        state = MarkerState(position = latLng), title = selectedPlace?.description
                     )
                 }
             }
@@ -252,9 +239,7 @@ private fun Content(isLoading: Boolean, data: List<Place>?, viewModel: PlacesVie
         }
 
         LazyColumn(
-            contentPadding = PaddingValues(vertical = 10.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-            modifier = Modifier.padding(start = 32.dp, end = 32.dp)
+            contentPadding = PaddingValues(vertical = 10.dp), verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.padding(start = 32.dp, end = 32.dp)
         ) {
             if (isLoading) {
                 items(10) {
@@ -263,9 +248,7 @@ private fun Content(isLoading: Boolean, data: List<Place>?, viewModel: PlacesVie
             } else {
                 items(items = data ?: listOf()) { item ->
                     WeatherDataDailyCard(
-                        name = item.name,
-                        date = item.description,
-                        episode = "Lat: ${item.lat}, Long: ${item.long}"
+                        name = item.name, date = item.description, latlng = "Lat: ${item.lat}, Long: ${item.long}"
                     )
                 }
             }

@@ -21,7 +21,7 @@ class PlacesViewModel @Inject constructor(private val placesUseCase: PlacesUseCa
         getPlaces()
     }
 
-    private fun getPlaces() {
+    fun getPlaces() {
         viewModelScope.launch {
             setState { currentState.copy(isLoading = true) }
             placesUseCase.getPlaces().collect {

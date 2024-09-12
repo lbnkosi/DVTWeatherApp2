@@ -1,12 +1,10 @@
 package com.lbnkosi.weatherapp.features.theme
 
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorPalette = darkColors(
     primary = PaleViolet,
