@@ -1,4 +1,4 @@
-##Android Weather Assessment: A Developer’s Growth Journey
+*Android Weather Assessment: A Developer’s Growth Journey*
 
 Overview
 
@@ -21,7 +21,7 @@ Current Assessment: Shifting Focus
 
 For this iteration, I decided to take a different approach. My goal was to move away from over-engineering and instead focus on aspects that provide real-world value across the app development lifecycle. Specifically, I’ve centered my work around the following key objectives:
 
-1. Unit Testing and TDD (Test-Driven Development)
+1. Unit Testing and TDD (Test-Driven Development):
 
 	•	This time, I adopted a TDD approach, emphasizing the importance of testing in the development process. By writing tests before the actual implementation, I aimed to ensure robust, bug-free code.
 	•	With maximum code coverage as a goal, I concentrated on making the codebase more reliable, giving future developers confidence in making changes.
