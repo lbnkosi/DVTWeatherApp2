@@ -80,43 +80,6 @@ class MapsDataSourceTest {
         verify(placesClient).findAutocompletePredictions(request)
     }
 
-    /*@Test
-    fun `test getMapsPlace returns correct data`() = runTest {
-        // Given
-        val placeId = "ChIJN1t_tDeuEmsRUsoyG83frY4"
-        val place = mock<Place> {
-            on { name } doReturn "Sydney"
-            on { address } doReturn "Sydney, NSW, Australia"
-            on { latLng } doReturn mock {
-                on { latitude } doReturn -33.867
-                on { longitude } doReturn 151.207
-            }
-        }
-
-        val request = FetchPlaceRequest.builder(placeId, listOf(Place.Field.LAT_LNG)).build()
-
-        // Mock Task
-        val mockTask: Task<FetchPlaceResponse> = Tasks.forResult(
-            mock {
-                on { place } doReturn place
-            }
-        )
-
-        whenever(placesClient.fetchPlace(request)).thenReturn(mockTask)
-
-        // When
-        val result = mapsDataSource.getMapsPlace(placeId)
-
-        // Then
-        assert(result.resourceStatus == ResourceStatus.SUCCESS)
-        assert(result.data?.name == "Sydney")
-        assert(result.data?.lat == "-33.867")
-        assert(result.data?.long == "151.207")
-
-        // Verify
-        verify(placesClient).fetchPlace(request)
-    }*/
-
     @Test
     fun `test getAutocompletePredictions returns error`() = runTest {
         // Given

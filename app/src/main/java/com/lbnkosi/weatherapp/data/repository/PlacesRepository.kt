@@ -13,8 +13,8 @@ class PlacesRepository @Inject constructor(private val dataSource: PlacesDataSou
         return dataSource.getPlaces().map { it.map() }
     }
 
-    override suspend fun getPlaceByAddress(address: String): Flow<Place?> {
-        return dataSource.getPlaceByAddress(address).map { it?.map() }
+    override suspend fun getPlaceById(id: String): Flow<Place?> {
+        return dataSource.getPlaceById(id).map { it?.map() }
     }
 
     override suspend fun createPlace(place: Place): Flow<ArrayList<Place>> {

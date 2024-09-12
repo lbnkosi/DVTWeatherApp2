@@ -43,20 +43,20 @@ class PlacesRepositoryTest {
     }
 
     @Test
-    fun `test getPlaceByAddress returns correct data`() = runTest {
+    fun `test getPlaceById returns correct data`() = runTest {
         // Given
-        val address = "123 Main St"
-        val place = PlacesEntity(id = 1, name = "Place 1", description = address)
+        val id = "123 Main St"
+        val place = PlacesEntity(id = 1, name = "Place 1", description = id)
         val flowResponse = flowOf(place)
 
-        whenever(dataSource.getPlaceByAddress(address)).thenReturn(flowResponse)
+        whenever(dataSource.getPlaceById(id)).thenReturn(flowResponse)
 
         // When
-        val result = placesRepository.getPlaceByAddress(address).first()
+        val result = placesRepository.getPlaceById(id).first()
 
         // Then
         assert(result?.id == 1)
-        assert(result?.description == address)
+        assert(result?.description == id)
     }
 
     @Test

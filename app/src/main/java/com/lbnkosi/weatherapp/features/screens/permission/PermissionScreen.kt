@@ -17,10 +17,9 @@ fun RequestLocationScreen(
     permissionGranted: Boolean,
     onContinueToApp: () -> Unit
 ) {
-    val context = LocalContext.current
+    LocalContext.current
     var buttonText by remember { mutableStateOf("Grant Location Permission") }
 
-    // Lottie animation state
     val composition by rememberLottieComposition(LottieCompositionSpec.Asset("location_animation.json"))
     val progress by animateLottieCompositionAsState(composition)
 
@@ -31,21 +30,18 @@ fun RequestLocationScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        // Title
         Text(
             text = "We need your location",
             fontSize = 24.sp,
             modifier = Modifier.padding(bottom= 16.dp)
         )
 
-        // Description
         Text(
             text = "We need your location to get the weather information for your current area.",
             fontSize = 16.sp,
             modifier = Modifier.padding(bottom= 24.dp)
         )
 
-        // Lottie Animation
         LottieAnimation(
             composition = composition,
             progress = progress,
@@ -54,7 +50,6 @@ fun RequestLocationScreen(
                 .padding(bottom= 32.dp)
         )
 
-        // Button to request location permission or continue to the app
         Button(
             onClick = {
                 if (!permissionGranted) {

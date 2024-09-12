@@ -43,20 +43,20 @@ class IPlacesRepositoryTest {
     }
 
     @Test
-    fun `test getPlaceByAddress returns place`(): Unit = runBlocking {
+    fun `test getPlaceById returns place`(): Unit = runBlocking {
         // Given
-        val address = "123 Main St"
+        val id = "123 Main St"
         val flowResponse: Flow<Place?> = flow { emit(place) }
 
         // When
-        `when`(placesRepository.getPlaceByAddress(address)).thenReturn(flowResponse)
+        `when`(placesRepository.getPlaceById(id)).thenReturn(flowResponse)
 
         // Act
-        val result = placesRepository.getPlaceByAddress(address)
+        val result = placesRepository.getPlaceById(id)
 
         // Then
         assertEquals(flowResponse, result)
-        verify(placesRepository).getPlaceByAddress(address)
+        verify(placesRepository).getPlaceById(id)
     }
 
     @Test

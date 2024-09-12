@@ -8,7 +8,7 @@ class PlacesUseCase @Inject constructor(private val repository: IPlacesRepositor
 
     suspend fun getPlaces() = repository.getPlaces()
 
-    suspend fun getPlaceByAddress(address: String) = repository.getPlaceByAddress(address)
+    suspend fun getPlaceById(id: String) = repository.getPlaceById(id)
 
     suspend fun createPlace(place: Place) = repository.createPlace(place)
 

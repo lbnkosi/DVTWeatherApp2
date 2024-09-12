@@ -28,27 +28,23 @@ class PermissionActivity : ComponentActivity() {
         setContent {
             RequestLocationScreen(
                 onRequestPermission = {
-                    // Request permission if not granted
                     when (ContextCompat.checkSelfPermission(
                         this,
                         Manifest.permission.ACCESS_FINE_LOCATION
                     )) {
                         PackageManager.PERMISSION_GRANTED -> {
-                            // Permission already granted
                             permissionGranted = true
                         }
                         else -> {
-                            // Request permission
                             requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
                         }
                     }
                 },
                 permissionGranted = permissionGranted,
                 onContinueToApp = {
-                    // Start MainActivity when permission is granted and the user clicks "Continue to App"
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
-                    finish() // Optionally, close the permission screen
+                    finish()
                 }
             )
         }

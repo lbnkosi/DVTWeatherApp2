@@ -48,17 +48,17 @@ class PlacesUseCaseTest {
     }
 
     @Test
-    fun `test getPlaceByAddress returns a place`(): Unit = runBlocking {
+    fun `test getPlaceById returns a place`(): Unit = runBlocking {
         // Given
-        val address = "Some Address"
-        `when`(placesRepository.getPlaceByAddress(address)).thenReturn(flow { emit(mockPlace) })
+        val id = "Some ID"
+        `when`(placesRepository.getPlaceById(id)).thenReturn(flow { emit(mockPlace) })
 
         // Act
-        val result = placesUseCase.getPlaceByAddress(address)
+        val result = placesUseCase.getPlaceById(id)
 
         // Then
         assertEquals(mockPlace, result?.single())
-        verify(placesRepository).getPlaceByAddress(address)
+        verify(placesRepository).getPlaceById(id)
     }
 
     @Test
