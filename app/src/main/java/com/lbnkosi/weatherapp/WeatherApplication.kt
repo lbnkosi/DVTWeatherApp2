@@ -11,7 +11,7 @@ class WeatherApplication: Application() {
     override fun onCreate() {
         super.onCreate()
         Stetho.initializeWithDefaults(this)
-        Places.initialize(applicationContext, "AIzaSyDp54F2JTJPsHH7ln0yzhnKi2PbY4BhQh0")
+        Places.initialize(applicationContext, "")
     }
 
 }
