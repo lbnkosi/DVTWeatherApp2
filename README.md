@@ -2,7 +2,10 @@
 
 ### Overview
 
-When I first joined DVT three years ago, I completed a Weather Assessment that challenged me to build a feature-rich Android application. Reflecting on that project today, I believe I demonstrated strong skills in writing clean, maintainable code, following best practices such as Dependency Injection, MVVM, and Room for persistence. You can view the original project https://github.com/lbnkosi/dvtweatherapp-android.
+When I first joined DVT three years ago, I completed a Weather Assessment that challenged me to build a feature-rich Android application. Reflecting on that project today, I believe I demonstrated strong skills in writing clean, maintainable code, following best practices such as Dependency Injection, MVVM, and Room for persistence.
+
+## Previous assessment link
+You can view the original project/assessment which I developed here https://github.com/lbnkosi/dvtweatherapp-android.
 
 As I redo this assessment now, my focus has evolved. Rather than creating another feature-packed app, I set new goals to showcase my growth as a developer. My intent is to highlight how I’ve matured over the years, not only in coding but in understanding the full Software Development Lifecycle (SDL) and its value to businesses, developers, and stakeholders.
 
